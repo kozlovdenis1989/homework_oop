@@ -17,11 +17,14 @@ class Student:
             raise PermissionError('rate_hw(). Error in block (if)')
 
 
-    def average_score(self):
+    def average_score(self, grade = None):
         average = []
-        for value in self.grades.values():
-            average.append(sum(value) / len(value))
-        return sum(average) / len(average)
+        if grade == None:
+            for value in self.grades.values():
+                average.append(sum(value) / len(value))
+            return sum(average) / len(average)
+        else:
+            return sum(self.grades[grade]) / len(self.grades[grade])
 
     def __str__(self):
         return (f'Имя: {self.name}\n'
@@ -63,11 +66,14 @@ class Lecturer(Mentor):
     def rate_hw(self, student, course, grade):
         raise PermissionError('This method nis not available for this class')
 
-    def average_score(self):
+    def average_score(self, grade = None):
         average = []
-        for value in self.grades.values():
-            average.append(sum(value) / len(value))
-        return sum(average) / len(average)
+        if grade == None:
+            for value in self.grades.values():
+                average.append(sum(value) / len(value))
+            return sum(average) / len(average)
+        else:
+            return sum(self.grades[grade]) / len(self.grades[grade])
 
     def __str__(self):
         return (f'Имя: {self.name}\n'
@@ -121,17 +127,37 @@ some_student.rate_hw(some_lecturer, 'Git', 7)
 some_student_1.rate_hw(some_lecturer_1, 'Python', 6)
 some_student_1.rate_hw(some_lecturer_1, 'Git', 6)
 
-
-# print(f'Оценки студентов: {some_student.grades}')
-# print(f'Оценки лекторов: {some_lecturer.grades}')
-
+# Date for all objects
 print('Эксперты:', some_reviewer, some_reviewer_1, sep='\n', end='\n\n')
 print('Лекторы:', some_lecturer, some_lecturer_1, sep='\n', end='\n\n')
 print('Студенты:', some_student, some_student_1, sep='\n', end='\n\n')
 
-# print(f'== {some_student == some_lecturer}')
-# print(f'< {some_student < some_lecturer}')
-# print(f'> {some_student > some_lecturer}')
-# print(f'<= {some_student <= some_lecturer}')
-# print(f'>= {some_student >= some_lecturer}')
-# print(f'!= {some_student != some_lecturer}')
+# Magic methods
+print(f'== {some_student == some_lecturer}')
+print(f'< {some_student < some_lecturer}')
+print(f'> {some_student > some_lecturer}')
+print(f'<= {some_student <= some_lecturer}')
+print(f'>= {some_student >= some_lecturer}')
+print(f'!= {some_student != some_lecturer}')
+print()
+
+# Create a function for calculating the average of all
+def average_score_objects_all(list_objects: list,  course: str):
+    average = []
+    object_class_name = list_objects[0].__class__.__name__
+
+    for object in list_objects:
+        average.append(object.average_score(course))
+
+    return f'Средняя оценка у {object_class_name} за курс {course}: {sum(average) / len(average)}'
+
+
+# Create lists of students and lectures
+students = [some_student, some_student_1]
+lectures = [some_lecturer, some_lecturer_1]
+
+
+print(average_score_objects_all(students, 'Python'))
+print(average_score_objects_all(lectures, 'Python'))
+print(average_score_objects_all(students, 'Git'))
+print(average_score_objects_all(lectures, 'Git'))
