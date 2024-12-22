@@ -101,35 +101,45 @@ class Reviewer(Mentor):
 some_student = Student('Ruoy', 'Eman', 'your_gender')
 some_student.courses_in_progress += ['Python', 'Git']
 some_student.finished_courses += ["Введение в программирование"]
+some_student_1 = Student('Denis', 'Kozlov', 'your_gender')
+some_student_1.courses_in_progress += ['Python', 'Git']
+some_student.finished_courses += ["Введение в программирование"]
 
 # Create reviewers
-some_reviewer = Reviewer('Some', 'Buddy')
+some_reviewer = Reviewer('Some_rev_1', 'Buddy_rev_1')
 some_reviewer.courses_attached += ['Python', 'Git']
+some_reviewer_1 = Reviewer('Some_rev_2', 'Buddy_rev_2')
+some_reviewer_1.courses_attached += ['Python', 'Git']
 
 # Create lectures
 some_lecturer = Lecturer('Some_lec_1', 'Buddy_lec_1')
 some_lecturer.courses_attached += ['Python', 'Git']
+some_lecturer_1 = Lecturer('Some_lec_2', 'Buddy_lec_2')
+some_lecturer_1.courses_attached += ['Python', 'Git']
 
 # Setting grades for students
-some_reviewer.rate_hw(some_student, 'Python', 10)
-some_reviewer.rate_hw(some_student, 'Git', 9)
-some_reviewer.rate_hw(some_student, 'Python', 8)
+some_reviewer.rate_hw(some_student, 'Git', 10)
+some_reviewer.rate_hw(some_student, 'Python', 6)
+some_reviewer_1.rate_hw(some_student_1, 'Git', 9)
+some_reviewer_1.rate_hw(some_student_1, 'Python', 10)
 
 # Setting grades for lectures
-some_student.rate_hw(some_lecturer, 'Git', 7)
-some_student.rate_hw(some_lecturer, 'Python', 8)
 some_student.rate_hw(some_lecturer, 'Python', 9)
+some_student.rate_hw(some_lecturer, 'Git', 7)
+some_student_1.rate_hw(some_lecturer_1, 'Python', 6)
+some_student_1.rate_hw(some_lecturer_1, 'Git', 6)
+
 
 # print(f'Оценки студентов: {some_student.grades}')
 # print(f'Оценки лекторов: {some_lecturer.grades}')
 
-print('Эксперты:', some_reviewer, sep='\n', end='\n\n')
-print('Лекторы:', some_lecturer, sep='\n', end='\n\n')
-print('Студенты:', some_student, sep='\n', end='\n\n')
+print('Эксперты:', some_reviewer, some_reviewer_1, sep='\n', end='\n\n')
+print('Лекторы:', some_lecturer, some_lecturer, sep='\n', end='\n\n')
+print('Студенты:', some_student, some_student_1, sep='\n', end='\n\n')
 
-print(f'== {some_student == some_lecturer}')
-print(f'< {some_student < some_lecturer}')
-print(f'> {some_student > some_lecturer}')
-print(f'<= {some_student <= some_lecturer}')
-print(f'>= {some_student >= some_lecturer}')
-print(f'!= {some_student != some_lecturer}')
+# print(f'== {some_student == some_lecturer}')
+# print(f'< {some_student < some_lecturer}')
+# print(f'> {some_student > some_lecturer}')
+# print(f'<= {some_student <= some_lecturer}')
+# print(f'>= {some_student >= some_lecturer}')
+# print(f'!= {some_student != some_lecturer}')
