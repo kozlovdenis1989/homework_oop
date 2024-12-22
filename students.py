@@ -133,12 +133,12 @@ print('Лекторы:', some_lecturer, some_lecturer_1, sep='\n', end='\n\n')
 print('Студенты:', some_student, some_student_1, sep='\n', end='\n\n')
 
 # Magic methods
-print(f'== {some_student == some_lecturer}')
-print(f'< {some_student < some_lecturer}')
-print(f'> {some_student > some_lecturer}')
-print(f'<= {some_student <= some_lecturer}')
-print(f'>= {some_student >= some_lecturer}')
-print(f'!= {some_student != some_lecturer}')
+print(f'== {some_student == some_student_1}')
+print(f'< {some_student < some_student_1}')
+print(f'> {some_student > some_student_1}')
+print(f'<= {some_lecturer_1 <= some_lecturer}')
+print(f'>= {some_lecturer_1>= some_lecturer}')
+print(f'!= {some_student != some_student_1}')
 print()
 
 # Create a function for calculating the average of all
