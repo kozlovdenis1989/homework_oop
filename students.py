@@ -25,18 +25,18 @@ class Student:
         else:
             raise PermissionError('Error in block (if)')
 
-    def average_score(self, courses: list):
+    def average_score(self):
         average = []
-        for value in courses.values():
+        for value in self.grades.values():
             average.append(sum(value) / len(value))
         return sum(average) / len(average)
 
     def __str__(self):
         return (f'Имя: {self.name}\n'
                 f'Фамилия: {self.surname}\n'
-                f'Средняя оценка за домашние задания: {self.average_score(self.courses_in_progress)}\n'
-                f'Курсы в процессе изучения: {', '.join(self.courses_in_progress)}\n'
-                f'Завершенные курсы: {', '.join(self.finished_courses)}')
+                f'Средняя оценка за домашние задания: {self.average_score()}\n'
+                f'Курсы в процессе изучения: {' '.join(self.courses_in_progress)}\n'
+                f'Завершенные курсы: {' '.join(self.finished_courses)}')
 
     def __eq__(self, other):
         return self.average_score() == other.average_score()
@@ -120,7 +120,7 @@ some_lecturer_1.courses_attached += ['Python', 'Git']
 # Setting grades for students
 some_reviewer.rate_hw(some_student, 'Git', 10)
 some_reviewer.rate_hw(some_student, 'Python', 6)
-some_reviewer_1.rate_hw(some_student_1, 'Git', 8)
+some_reviewer_1.rate_hw(some_student_1, 'Git', 9)
 some_reviewer_1.rate_hw(some_student_1, 'Python', 10)
 
 # Setting grades for lectures
@@ -129,29 +129,17 @@ some_student.rate_hw(some_lecturer, 'Git', 7)
 some_student_1.rate_hw(some_lecturer_1, 'Python', 6)
 some_student_1.rate_hw(some_lecturer_1, 'Git', 6)
 
-# Date for all objects
+
+# print(f'Оценки студентов: {some_student.grades}')
+# print(f'Оценки лекторов: {some_lecturer.grades}')
+
 print('Эксперты:', some_reviewer, some_reviewer_1, sep='\n', end='\n\n')
 print('Лекторы:', some_lecturer, some_lecturer, sep='\n', end='\n\n')
 print('Студенты:', some_student, some_student_1, sep='\n', end='\n\n')
 
-
-# Create a function for calculating the average of all
-def average_score(list_objects: list,  course: str):
-    average = []
-    object_class_name = list_objects[0].__class__.__name__
-
-    for object in list_objects:
-        average.append(object.average_score())
-
-    return f'Средняя оценка у {object_class_name} за курс {course}: {sum(average) / len(average)}'
-
-
-# Create lists of students and lectures
-students = [some_student, some_student_1]
-lectures = [some_lecturer, some_lecturer_1]
-
-
-print(average_score(students, 'python'))
-print(average_score(lectures, 'python'))
-print(average_score(students, 'Git'))
-print(average_score(lectures, 'Git'))
+# print(f'== {some_student == some_lecturer}')
+# print(f'< {some_student < some_lecturer}')
+# print(f'> {some_student > some_lecturer}')
+# print(f'<= {some_student <= some_lecturer}')
+# print(f'>= {some_student >= some_lecturer}')
+# print(f'!= {some_student != some_lecturer}')
