@@ -51,7 +51,7 @@ some_student = Student('Ruoy', 'Eman', 'your_gender')
 some_student.courses_in_progress += ['Python', 'Git']
 
 some_reviewer = Reviewer('Some', 'Buddy')
-some_reviewer.courses_attached += ['Python']
+some_reviewer.courses_attached += ['Python', 'Git']
 
 some_lecturer = Lecturer('Some_lec_1', 'Buddy_lec_1')
 some_lecturer.courses_attached += ['Python', 'Git']
