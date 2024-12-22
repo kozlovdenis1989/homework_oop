@@ -16,14 +16,6 @@ class Student:
         else:
             raise PermissionError('rate_hw(). Error in block (if)')
 
-    def rate_hw(self, lecturer, course, grade):
-        if isinstance(lecturer, Lecturer) and course in self.courses_in_progress and lecturer.courses_attached:
-            if course in lecturer.grades:
-                lecturer.grades[course] += [grade]
-            else:
-                lecturer.grades[course] = [grade]
-        else:
-            raise PermissionError('Error in block (if)')
 
     def average_score(self):
         average = []
@@ -35,8 +27,8 @@ class Student:
         return (f'Имя: {self.name}\n'
                 f'Фамилия: {self.surname}\n'
                 f'Средняя оценка за домашние задания: {self.average_score()}\n'
-                f'Курсы в процессе изучения: {' '.join(self.courses_in_progress)}\n'
-                f'Завершенные курсы: {' '.join(self.finished_courses)}')
+                f'Курсы в процессе изучения: {', '.join(self.courses_in_progress)}\n'
+                f'Завершенные курсы: {', '.join(self.finished_courses)}')
 
     def __eq__(self, other):
         return self.average_score() == other.average_score()
@@ -103,7 +95,7 @@ some_student.courses_in_progress += ['Python', 'Git']
 some_student.finished_courses += ["Введение в программирование"]
 some_student_1 = Student('Denis', 'Kozlov', 'your_gender')
 some_student_1.courses_in_progress += ['Python', 'Git']
-some_student.finished_courses += ["Введение в программирование"]
+some_student_1.finished_courses += ["Введение в программирование"]
 
 # Create reviewers
 some_reviewer = Reviewer('Some_rev_1', 'Buddy_rev_1')
@@ -134,7 +126,7 @@ some_student_1.rate_hw(some_lecturer_1, 'Git', 6)
 # print(f'Оценки лекторов: {some_lecturer.grades}')
 
 print('Эксперты:', some_reviewer, some_reviewer_1, sep='\n', end='\n\n')
-print('Лекторы:', some_lecturer, some_lecturer, sep='\n', end='\n\n')
+print('Лекторы:', some_lecturer, some_lecturer_1, sep='\n', end='\n\n')
 print('Студенты:', some_student, some_student_1, sep='\n', end='\n\n')
 
 # print(f'== {some_student == some_lecturer}')
