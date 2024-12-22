@@ -7,6 +7,15 @@ class Student:
         self.courses_in_progress = []
         self.grades = {}
 
+    def rate_hw(self, lecturer, course, grade):
+        if isinstance(lecturer, Lecturer) and course in self.courses_in_progress and lecturer.courses_attached:
+            if course in lecturer.grades:
+                lecturer.grades[course] += [grade]
+            else:
+                lecturer.grades[course] = [grade]
+        else:
+            raise PermissionError('Error in block (if)')
+
 
 class Mentor:
     def __init__(self, name, surname):
@@ -25,7 +34,12 @@ class Mentor:
 
 
 class Lecturer(Mentor):
-    pass
+    def __init__(self, name, surname):
+        super().__init__(name, surname)
+        self.grades = {}
+
+    def rate_hw(self, student, course, grade):
+        raise PermissionError('This method nis not available for this class')
 
 
 class Reviewer(Mentor):
@@ -39,8 +53,16 @@ some_student.courses_in_progress += ['Python']
 some_reviewer = Reviewer('Some', 'Buddy')
 some_reviewer.courses_attached += ['Python']
 
-some_reviewer.rate_hw(some_student, 'Python', 10)
-some_reviewer.rate_hw(some_student, 'Python', 10)
-some_reviewer.rate_hw(some_student, 'Python', 10)
+some_lecturer = Lecturer('Some_lec_1', 'Buddy_lec_1')
+some_lecturer.courses_attached += ['Python', 'Git']
 
-print(some_student.grades)
+some_reviewer.rate_hw(some_student, 'Python', 10)
+some_reviewer.rate_hw(some_student, 'Python', 9)
+some_reviewer.rate_hw(some_student, 'Python', 8)
+
+some_student.rate_hw(some_lecturer, 'Python', 7)
+some_student.rate_hw(some_lecturer, 'Python', 8)
+some_student.rate_hw(some_lecturer, 'Python', 9)
+
+print(f'Оценки студентов: {some_student.grades}')
+print(f'Оценки лекторов: {some_lecturer.grades}')
