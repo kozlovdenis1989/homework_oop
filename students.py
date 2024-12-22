@@ -14,7 +14,7 @@ class Student:
             else:
                 lecturer.grades[course] = [grade]
         else:
-            raise PermissionError('Error in block (if)')
+            raise PermissionError('rate_hw(). Error in block (if)')
 
 
 class Mentor:
@@ -30,7 +30,7 @@ class Mentor:
             else:
                 student.grades[course] = [grade]
         else:
-            return 'Ошибка'
+            raise PermissionError('rate_hw(). Error in block (if)')
 
 
 class Lecturer(Mentor):
@@ -48,7 +48,7 @@ class Reviewer(Mentor):
 
 
 some_student = Student('Ruoy', 'Eman', 'your_gender')
-some_student.courses_in_progress += ['Python']
+some_student.courses_in_progress += ['Python', 'Git']
 
 some_reviewer = Reviewer('Some', 'Buddy')
 some_reviewer.courses_attached += ['Python']
@@ -57,10 +57,10 @@ some_lecturer = Lecturer('Some_lec_1', 'Buddy_lec_1')
 some_lecturer.courses_attached += ['Python', 'Git']
 
 some_reviewer.rate_hw(some_student, 'Python', 10)
-some_reviewer.rate_hw(some_student, 'Python', 9)
+some_reviewer.rate_hw(some_student, 'Git', 9)
 some_reviewer.rate_hw(some_student, 'Python', 8)
 
-some_student.rate_hw(some_lecturer, 'Python', 7)
+some_student.rate_hw(some_lecturer, 'Git', 7)
 some_student.rate_hw(some_lecturer, 'Python', 8)
 some_student.rate_hw(some_lecturer, 'Python', 9)
 
